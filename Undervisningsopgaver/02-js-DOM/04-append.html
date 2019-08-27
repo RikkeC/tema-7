@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style>
+        #firkant {
+            height: 200px;
+            background-color: green;
+            width: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        #cirkel {
+            border-radius: 50%;
+            background-color: red;
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="firkant"></div>
+    <div id="cirkel"></div>
+
+
+    <script>
+        const firkant = document.querySelector("#firkant");
+        const cirkel = document.querySelector("#cirkel");
+
+        firkant.innerHTML = `<img src="frog.png" alt="frø">`;
+        cirkel.innerHTML = `<img src="pig.png" alt="gris">`;
+
+    </script>
+</body>
+
+</html>
