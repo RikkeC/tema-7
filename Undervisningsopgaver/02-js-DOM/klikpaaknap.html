@@ -19,7 +19,6 @@
             font-size: 2rem;
             margin: 10px;
         }
-
     </style>
 
 </head>
@@ -34,7 +33,7 @@
     <button id="html">
         html
     </button>
-    <button id="slet">
+    <button id="flyt">
         flyt
     </button>
     <div id="box"></div>
@@ -46,22 +45,19 @@
         function start() {
             let box = document.querySelector("#box");
             klik.addEventListener("click", vis);
-
+            slet.addEventListener("click", væk);
 
         }
 
         function vis() {
             console.log(vis);
-            box.innerHTML = `<h1>KLIK</h1>`;
-            slet.addEventListener("click", slet);
+            box.innerHTML = "KLIK";
+
         }
 
-        function slet() {
+        function væk() {
             console.log(slet);
-            klik.removeEventListener("click", vis);
+            box.innerHTML = "";
         }
-
     </script>
-</body>
-
-</html>
+</body></html>
