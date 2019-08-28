@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>js-oevelse-1</title>
+    <style>
+        body {
+            color: burlywood;
+        }
+
+        .box {
+            display: inline-block;
+            width: 10vw;
+            height: 10vw;
+            border: 1px solid silver;
+            margin: 7vw;
+            transition: all 1s;
+        }
+
+        /*********************/
+    </style>
+
+</head>
+
+<body>
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <div class="box" id="box3"></div>
+    <div class="box" id="box4"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            box1.addEventListener("click", skift1);
+            box2.addEventListener("click", skift2);
+            box3.addEventListener("click", skift3);
+            box4.addEventListener("click", skift4);
+        }
+
+        function skift1() {
+            box1.style.backgroundColor = "rosybrown";
+        }
+
+        function skift2() {
+            box2.style.transform = "scale(0)";
+        }
+
+        function skift3() {
+            box3.style.borderColor = "red";
+
+        }
+
+        function skift4() {
+            box4.style.borderRadius = "50%";
+        }
+    </script>
+
+</body></html>
