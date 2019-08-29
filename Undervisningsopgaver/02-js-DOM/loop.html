@@ -7,12 +7,16 @@
     <link rel="stylesheet" href="">
     <style>
         div {
-            width: 100px;
             height: 100px;
             background-color: orange;
-            display: inline-block;
-            border-radius: 50%;
             transition: .5s;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 1em;
+
         }
 
         .marker {
@@ -23,10 +27,24 @@
 </head>
 
 <body>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <section>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
 
     <script>
         const diver = document.querySelectorAll("div");
