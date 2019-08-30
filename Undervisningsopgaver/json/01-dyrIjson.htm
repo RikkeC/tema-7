@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <style>
+        article {
+            border: 1px solid black;
+            margin: 5px;
+            text-align: center;
+            width: 300px;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <template>
+        <article>
+            <h2>navn</h2>
+            <img src="" alt="">
+            <p class="typep">type</p>
+            <p class="levestedp">levested</p>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+
+    <script>
+        let dyrarray = [];
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            hentJson();
+        }
+
+        async function hentJson() {
+            const response = await fetch("dyr.json");
+            console.log(response);
+            dyrarray = await response.json();
+            console.log(dyrarray);
+
+            visJson();
+        }
+
+        function visJson() {
+
+            const article = document.querySelector("article");
+            const skabelon = document.querySelector("template").content;
+            const liste = document.querySelector("#liste");
+
+            dyrarray.forEach(dyr => {
+                const klon = skabelon.cloneNode(true);
+                console.log(klon);
+                const h2 = klon.querySelector("h2");
+                h2.textContent = dyr.navn;
+                const img = klon.querySelector("img");
+                img.src = dyr.billede;
+                img.alt = "billede af " + dyr.navn;
+                const p1 = klon.querySelector(".typep");
+                p1.textContent = "type: " + dyr.type;
+                const p2 = klon.querySelector(".levestedp");
+                p2.textContent = "levested: " + dyr.levested;
+                liste.appendChild(klon);
+            })
+        }
+    </script>
+
+</body></html>
