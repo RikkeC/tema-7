@@ -5,38 +5,80 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="">
+    <style>
+        img {
+            width: 100%;
+        }
+
+        article {
+            border: none;
+            background-color: peachpuff;
+            text-align: center;
+            padding: 10px;
+
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-gap: 2vw;
+            margin: 2vw;
+        }
+    </style>
+
 </head>
 
 <body>
+
     <h1>Personliste</h1>
 
     <template>
         <article>
             <h2>Navn</h2>
             <img>
-            <p></p>
+            <a></a>
         </article>
     </template>
 
     <section id="liste"></section>
 
     <script>
+        let personliste = [];
+
         document.addEventListener("DOMContentLoaded", start)
 
         function start() {
             hentData();
         }
 
-        function hentData() {
+        async function hentData() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/1Xge7slZ9dEOTCn1Yxl3OE4xgvrXOL8Y_iu3WN1yGB1U/od6/public/values?alt=json");
+            console.log(jsonData);
+            personliste = await jsonData.json();
+            console.log(personliste);
+
             visData();
+
         }
 
         function visData() {
+            const skabelon = document.querySelector("template").content;
+            const liste = document.querySelector("#liste");
 
+            personliste.feed.entry.forEach(person => {
+                const klon = skabelon.cloneNode(true);
+                console.log(klon);
+                const h2 = klon.querySelector("h2");
+                h2.textContent = person.gsx$navn.$t;
+                const img = klon.querySelector("img");
+                img.src = person.gsx$billede.$t;
+                img.alt = "billede af " + person.gsx$navn.$t;
+                const link = klon.querySelector("a");
+                link.setAttribute("href", "http://github.com/" + person.gsx$github.$t);
+                link.textContent = "Link til github"
+                liste.appendChild(klon);
+
+            })
         }
-
     </script>
-</body>
-
-</html>
+</body></html>
