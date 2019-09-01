@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BISTRO BABUSHKA</title>
+    <link rel="stylesheet" href="">
+    <style>
+        article {
+            border: 2px solid gold;
+            text-align: center;
+            padding: 15px;
+
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-gap: 2vw;
+            margin: 2vw;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 4vw;
+            font-size: 3rem;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>BISTRO BABUSHKA</h1>
+
+    <template>
+        <article>
+            <h2></h2>
+            <p class="kort"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+    <script>
+        let menuliste = [];
+
+        document.addEventListener("DOMContentLoaded", start)
+
+        function start() {
+            hentData();
+        }
+
+        async function hentData() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json");
+
+            console.log(jsonData);
+            menuliste = await jsonData.json();
+            console.log(menuliste);
+
+            visData();
+
+        }
+
+        function visData() {
+            const skabelon = document.querySelector("template").content;
+            const liste = document.querySelector("#liste");
+
+            menuliste.feed.entry.forEach(menu => {
+                const klon = skabelon.cloneNode(true);
+
+                const h2 = klon.querySelector("h2");
+
+                h2.textContent = menu.gsx$navn.$t;
+
+                const kort = klon.querySelector(".kort");
+
+                kort.textContent = menu.gsx$kort.$t;
+
+                const pris = klon.querySelector(".pris");
+                pris.textContent = menu.gsx$pris.$t + " kr";
+
+                liste.appendChild(klon);
+            })
+
+
+
+
+
+
+        }
+    </script>
+</body></html>
