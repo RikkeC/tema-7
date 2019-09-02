@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personliste</title>
+    <style>
+        img {
+            width: 100%;
+        }
+
+        article {
+            border: 2px solid gold;
+            text-align: center;
+            padding: 15px;
+
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-gap: 2vw;
+            margin: 2vw;
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 4vw;
+            font-size: 3rem;
+
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 2vw;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Personliste</h1>
+
+    <template>
+        <article>
+            <h2>Navn</h2>
+            <img>
+            <p class="alder"></p>
+            <p class="hold"></p>
+            <a></a>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+    <script>
+        let personliste = [];
+        let filter = "k";
+
+        document.addEventListener("DOMContentLoaded", start)
+
+        function start() {
+            hentData();
+        }
+
+        async function hentData() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/1Xge7slZ9dEOTCn1Yxl3OE4xgvrXOL8Y_iu3WN1yGB1U/od6/public/values?alt=json");
+            console.log(jsonData);
+            personliste = await jsonData.json();
+            console.log(personliste);
+
+            visData();
+
+        }
+
+        function visData() {
+            const skabelon = document.querySelector("template").content;
+            const liste = document.querySelector("#liste");
+
+            personliste.feed.entry.forEach(person => {
+                if (person.gsx$køn.$t == filter) {
+
+                    const klon = skabelon.cloneNode(true);
+                    console.log(klon);
+
+                    const h2 = klon.querySelector("h2");
+                    h2.textContent = person.gsx$navn.$t;
+
+                    const img = klon.querySelector("img");
+                    img.src = person.gsx$billede.$t;
+                    img.alt = "billede af " + person.gsx$navn.$t;
+
+                    const alder = klon.querySelector(".alder");
+                    alder.textContent = "Alder: " + person.gsx$alder.$t;
+
+                    const hold = klon.querySelector(".hold");
+                    hold.textContent = "Hold: " + person.gsx$hold.$t;
+
+                    const link = klon.querySelector("a");
+                    link.setAttribute("href", "http://github.com/" + person.gsx$github.$t);
+                    link.textContent = "Link til github"
+
+                    liste.appendChild(klon);
+
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>
