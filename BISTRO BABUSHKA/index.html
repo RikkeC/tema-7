@@ -26,9 +26,11 @@
             text-transform: uppercase;
             margin: 4vw;
             font-size: 3rem;
-
         }
 
+        img {
+            border-radius: 50%;
+        }
     </style>
 </head>
 
@@ -85,7 +87,7 @@
                 pris.textContent = menu.gsx$pris.$t + " kr";
 
 
-                klon.querySelector("img").src = "/imgs/small" + menu.gsx$billede.$t + "-sm.jpg";
+                klon.querySelector("img").src = "imgs/small/" + menu.gsx$billede.$t + "-sm.jpg";
 
                 liste.appendChild(klon);
             })
@@ -96,8 +98,5 @@
 
 
         }
-
     </script>
-</body>
-
-</html>
+</body></html>
