@@ -7,6 +7,10 @@
     <title>BISTRO BABUSHKA</title>
     <link rel="stylesheet" href="">
     <style>
+        img {
+            width: 100%;
+        }
+
         article {
             border: 2px solid gold;
             text-align: center;
@@ -36,7 +40,14 @@
 
 <body>
     <h1>BISTRO BABUSHKA</h1>
-
+    <nav>
+        <button class="valgt" data-kategori="alle">Alle</button>
+        <button data-kategori="forretter">Foretter</button>
+        <button data-kategori="hovedretter">Hovedretter</button>
+        <button data-kategori="desserter">Desserter</button>
+        <button data-kategori="drikkevarer">Drikkevarer</button>
+    </nav>
+    <h2>Menukort</h2>
     <template>
         <article>
             <img>
@@ -49,12 +60,25 @@
     <section id="liste"></section>
 
     <script>
-        let menuliste = [];
-
         document.addEventListener("DOMContentLoaded", start)
+        let menuliste = [];
+        let filter = "alle";
+
 
         function start() {
+            const filtrerknapper = document.querySelectorAll("button");
+            filtrerknapper.forEach(knap => knap.addEventListener("click", filtrerMenu));
+
             hentData();
+        }
+
+        function filtrerMenu() {
+            console.log(this);
+            document.querySelector(".valgt").classList.remove("valgt");
+            filter = this.dataset.kategori;
+            this.classList.add("valgt");
+
+            visData();
         }
 
         async function hentData() {
@@ -72,24 +96,28 @@
             const skabelon = document.querySelector("template").content;
             const liste = document.querySelector("#liste");
 
+            liste.textContent = "";
             menuliste.feed.entry.forEach(menu => {
-                const klon = skabelon.cloneNode(true);
+                if (menu.gsx$kategori.$t == filter || filter == "alle") {
 
-                const h2 = klon.querySelector("h2");
+                    const klon = skabelon.cloneNode(true);
 
-                h2.textContent = menu.gsx$navn.$t;
+                    const h2 = klon.querySelector("h2");
 
-                const kort = klon.querySelector(".kort");
+                    h2.textContent = menu.gsx$navn.$t;
 
-                kort.textContent = menu.gsx$kort.$t;
+                    const kort = klon.querySelector(".kort");
 
-                const pris = klon.querySelector(".pris");
-                pris.textContent = menu.gsx$pris.$t + " kr";
+                    kort.textContent = menu.gsx$kort.$t;
+
+                    const pris = klon.querySelector(".pris");
+                    pris.textContent = menu.gsx$pris.$t + " kr";
 
 
-                klon.querySelector("img").src = "imgs/small/" + menu.gsx$billede.$t + "-sm.jpg";
+                    klon.querySelector("img").src = "imgs/small/" + menu.gsx$billede.$t + "-sm.jpg";
 
-                liste.appendChild(klon);
+                    liste.appendChild(klon);
+                }
             })
 
 
