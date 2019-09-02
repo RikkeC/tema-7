@@ -18,28 +18,65 @@
 
         }
 
+        nav {
+            text-align: center;
+            margin: 3vw;
+        }
+
+        button {
+            border: none;
+            padding: 1vw 2vw;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: gold;
+        }
+
+        .valgt {
+            background-color: gold;
+        }
+
+
         section {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             grid-gap: 2vw;
-            margin: 2vw;
+            margin: 2vw 7vw;
         }
 
         h1 {
             text-align: center;
-            text-transform: uppercase;
             margin: 4vw;
             font-size: 3rem;
         }
 
-        img {
-            border-radius: 50%;
+        h2 {
+            text-align: center;
+
         }
+
+        footer {
+            background-color: gainsboro;
+            display: flex;
+            justify-content: center;
+        }
+
+        footer p {
+            margin: 2vw 5vw;
+        }
+
     </style>
 </head>
 
 <body>
+    <header>
+        <splash>
+            <img src="imgs/splash/Artboard%202.png" alt="splashbilled">
+        </splash>
+    </header>
     <h1>BISTRO BABUSHKA</h1>
+    <h2>Menukort</h2>
     <nav>
         <button class="valgt" data-kategori="alle">Alle</button>
         <button data-kategori="forretter">Foretter</button>
@@ -47,7 +84,7 @@
         <button data-kategori="desserter">Desserter</button>
         <button data-kategori="drikkevarer">Drikkevarer</button>
     </nav>
-    <h2>Menukort</h2>
+
     <template>
         <article>
             <img>
@@ -126,5 +163,22 @@
 
 
         }
+
     </script>
-</body></html>
+    <footer>
+        <p>Kontakt:
+            <br>Tel:12345678
+            <br>Mail: BISTROBABUSHKA@mail.dk
+        </p>
+        <p>Åbningstider:
+            <br>Man-fre: 14:00 - 22:00
+            <br>Lør-søn: 12:00 - 22:00
+        </p>
+        <p>Addresse:
+            <br>Babushkagade 20
+            <br>1234 København
+        </p>
+    </footer>
+</body>
+
+</html>
