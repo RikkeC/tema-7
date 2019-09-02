@@ -28,6 +28,7 @@
             font-size: 3rem;
 
         }
+
     </style>
 </head>
 
@@ -36,6 +37,7 @@
 
     <template>
         <article>
+            <img>
             <h2></h2>
             <p class="kort"></p>
             <p class="pris"></p>
@@ -82,6 +84,9 @@
                 const pris = klon.querySelector(".pris");
                 pris.textContent = menu.gsx$pris.$t + " kr";
 
+
+                klon.querySelector("img").src = "/imgs/small" + menu.gsx$billede.$t + "-sm.jpg";
+
                 liste.appendChild(klon);
             })
 
@@ -91,5 +96,8 @@
 
 
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
