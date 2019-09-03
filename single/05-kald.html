@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personliste</title>
+    <style>
+        img {
+            width: 100%;
+        }
+
+        article {
+            border: 2px solid gold;
+            text-align: center;
+            padding: 15px;
+
+        }
+
+        nav {
+            text-align: center;
+        }
+
+        button {
+            border: none;
+            padding: 1vw 2vw;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: gold;
+        }
+
+        .valgt {
+            background-color: gold;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-gap: 2vw;
+            margin: 2vw;
+        }
+
+        #detalje {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: hsla(51, 100%, 50%, 0.32);
+            ;
+            overflow: scroll;
+
+
+        }
+
+        #detalje .luk {
+            position: fixed;
+            top: 0;
+            right: 0;
+            font-size: 4rem;
+
+        }
+
+        #detalje .person {
+            width: 30vw;
+            min-height: 30vh;
+            margin: 4rem auto;
+            padding: 4rem;
+            background: white;
+
+        }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 4vw;
+            font-size: 3rem;
+
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 2vw;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Personliste</h1>
+    <h2>MMD 2019</h2>
+
+    <nav>
+        <button class="valgt" data-køn="alle">Alle</button>
+        <button data-køn="k">Kvinder</button>
+        <button data-køn="m">Mænd</button>
+        <button data-køn="andet">Andet</button>
+    </nav>
+
+    <template>
+        <article class="person">
+            <h2>Navn</h2>
+            <img>
+            <p class="alder"></p>
+            <p class="hold"></p>
+            <a></a>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+    <section id="detalje">
+        <article class="person">
+            <button class="luk">✕</button>
+            <h2></h2>
+            <img src="" alt="">
+            <p>Github: <a class="githubLink" href=""></a></p>
+        </article>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start)
+        let personliste = [];
+        let filter = "alle";
+
+        function start() {
+            const filtrerknapper = document.querySelectorAll("nav button");
+            filtrerknapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
+            document.querySelector("#detalje").style.display = "none";
+            hentData();
+        }
+
+        function filtrerPersoner() {
+            console.log(this);
+            document.querySelector(".valgt").classList.remove("valgt");
+            filter = this.dataset.køn;
+            this.classList.add("valgt");
+            visData();
+        }
+
+        async function hentData() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/1Xge7slZ9dEOTCn1Yxl3OE4xgvrXOL8Y_iu3WN1yGB1U/od6/public/values?alt=json");
+            console.log(jsonData);
+
+            personliste = await jsonData.json();
+            console.log(personliste);
+
+            visData();
+            skjulDetalje();
+
+        }
+
+        function visData() {
+            const skabelon = document.querySelector("template").content;
+            const liste = document.querySelector("#liste");
+            liste.textContent = "";
+            personliste.feed.entry.forEach(person => {
+                if (person.gsx$køn.$t == filter || filter == "alle") {
+
+                    const klon = skabelon.cloneNode(true);
+                    console.log(klon);
+
+                    const h2 = klon.querySelector("h2");
+                    h2.textContent = person.gsx$navn.$t;
+
+                    const img = klon.querySelector("img");
+                    img.src = person.gsx$billede.$t;
+                    img.alt = "billede af " + person.gsx$navn.$t;
+
+                    const alder = klon.querySelector(".alder");
+                    alder.textContent = "Alder: " + person.gsx$alder.$t;
+
+                    const hold = klon.querySelector(".hold");
+                    hold.textContent = "Hold: " + person.gsx$hold.$t;
+
+                    const link = klon.querySelector("a");
+                    link.setAttribute("href", "http://github.com/" + person.gsx$github.$t);
+                    link.textContent = "Link til github"
+
+                    klon.querySelector(".person").addEventListener("click", () => {
+                        location.href = `06-detalje.html?github=${person.gsx$github.$t}`;
+                    });
+                    liste.appendChild(klon);
+
+
+
+                }
+            })
+
+        }
+    </script>
+</body></html>
