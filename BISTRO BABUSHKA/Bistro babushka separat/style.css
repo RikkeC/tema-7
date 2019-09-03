@@ -29,25 +29,6 @@ button:hover {
     background-color: lightgray;
 }
 
-#detalje .luk {
-    position: fixed;
-    top: 5vw;
-    right: 31vw;
-    font-size: 2rem;
-    cursor: pointer;
-
-}
-
-#detalje .menu {
-    width: 30vw;
-    min-height: 30vh;
-    margin: 4rem auto;
-    padding: 4rem;
-    background: white;
-
-}
-
-
 #detalje {
     position: fixed;
     top: 0;

@@ -59,7 +59,8 @@ function visData() {
             klon.querySelector("img").src = "imgs/small/" + menu.gsx$billede.$t + "-sm.jpg";
 
             klon.querySelector(".menu").addEventListener("click", () => {
-                visDetalje(menu);
+                location.href = `separat.html?id=${menu.gsx$id.$t}`;
+
             });
 
 
@@ -67,20 +68,6 @@ function visData() {
         }
     })
 
-}
-
-function visDetalje(menu) {
-    document.querySelector("#detalje").style.display = "block";
-
-    document.querySelector("#detalje .luk").addEventListener("click", skjulDetalje);
-
-    document.querySelector("#detalje h2").textContent = menu.gsx$navn.$t;
-
-    document.querySelector("#detalje img").src = "imgs/large/" + menu.gsx$billede.$t + ".jpg";
-
-    document.querySelector("#detalje #lang").textContent = menu.gsx$lang.$t;
-
-    document.querySelector("#detalje #pris").textContent = menu.gsx$pris.$t + " kr";
 }
 
 function skjulDetalje() {
