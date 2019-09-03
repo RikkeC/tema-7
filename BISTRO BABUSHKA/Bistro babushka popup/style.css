@@ -1,0 +1,90 @@
+img {
+    width: 100%;
+}
+
+article {
+    border: 2px solid lightgrey;
+    text-align: center;
+    padding: 15px;
+
+}
+
+nav {
+    text-align: center;
+    margin: 3vw;
+}
+
+button {
+    border: none;
+    padding: 1vw 2vw;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: lightgray;
+}
+
+.valgt {
+    background-color: lightgray;
+}
+
+#detalje .luk {
+    position: fixed;
+    top: 5vw;
+    right: 31vw;
+    font-size: 2rem;
+    cursor: pointer;
+
+}
+
+#detalje .menu {
+    width: 30vw;
+    min-height: 30vh;
+    margin: 4rem auto;
+    padding: 4rem;
+    background: white;
+
+}
+
+
+#detalje {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+
+}
+
+
+#liste {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-gap: 2vw;
+    margin: 2vw 7vw;
+    cursor: pointer;
+}
+
+h1 {
+    text-align: center;
+    margin: 4vw;
+    font-size: 3rem;
+}
+
+h2 {
+    text-align: center;
+
+}
+
+footer {
+    background-color: gainsboro;
+    display: flex;
+    justify-content: center;
+    height: 6vw;
+}
+
+footer p {
+    margin: 1vw 5vw;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BISTRO BABUSHKA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <splash>
+            <img src="imgs/splash/Artboard%202.png" alt="splashbilled">
+        </splash>
+    </header>
+    <h1>BISTRO BABUSHKA</h1>
+    <h2>Menukort</h2>
+    <nav>
+        <button class="valgt" data-kategori="alle">Alle</button>
+        <button data-kategori="forretter">Foretter</button>
+        <button data-kategori="hovedretter">Hovedretter</button>
+        <button data-kategori="desserter">Desserter</button>
+        <button data-kategori="drikkevarer">Drikkevarer</button>
+    </nav>
+
+    <template>
+        <article class="menu">
+            <img>
+            <h2></h2>
+            <p class="kort"></p>
+            <p class="pris"></p>
+        </article>
+    </template>
+
+    <section id="liste"></section>
+
+    <section id="detalje">
+        <article class="menu">
+            <button class="luk">✕</button>
+            <h2></h2>
+            <img src="" alt="">
+            <p id="lang"></p>
+            <p id="pris"></p>
+        </article>
+    </section>
+
+    <script src="script.js"></script>
+    <footer>
+        <p>Kontakt:
+            <br>Tel:12345678
+            <br>Mail: BISTROBABUSHKA@mail.dk
+        </p>
+        <p>Åbningstider:
+            <br>Man-fre: 14:00 - 22:00
+            <br>Lør-søn: 12:00 - 22:00
+        </p>
+        <p>Addresse:
+            <br>Babushkagade 20
+            <br>1234 København
+        </p>
+    </footer>
+</body>
+
+</html>
