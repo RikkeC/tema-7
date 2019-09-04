@@ -1,75 +1,54 @@
-document.addEventListener("DOMContentLoaded", start)
+document.addEventListener("DOMContentLoaded", start);
+
 let menuliste = [];
 let filter = "alle";
-
+let filterknapper = document.querySelectorAll("nav button");
+const skabelon = document.querySelector("template").content;
+const liste = document.querySelector("#liste");
 
 function start() {
-    const filtrerknapper = document.querySelectorAll("nav button");
-    filtrerknapper.forEach(knap => knap.addEventListener("click", filtrerMenu));
-
-    document.querySelector("#detalje").style.display = "none";
-
     hentData();
+    filterknapper.forEach(knap => knap.addEventListener("click", filtrer));
 }
 
-function filtrerMenu() {
-    console.log(this);
+function filtrer() {
     document.querySelector(".valgt").classList.remove("valgt");
-    filter = this.dataset.kategori;
+
     this.classList.add("valgt");
+
+    filter = this.dataset.kategori;
 
     visData();
 }
 
 async function hentData() {
     let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json");
-
-    console.log(jsonData);
-    menuliste = await jsonData.json();
-    console.log(menuliste);
-
+    menu = await jsonData.json();
     visData();
-    skjulDetalje();
-
 }
 
 function visData() {
-    const skabelon = document.querySelector("template").content;
-    const liste = document.querySelector("#liste");
-
     liste.textContent = "";
 
-    menuliste.feed.entry.forEach(menu => {
+    menu.feed.entry.forEach(menu => {
         if (menu.gsx$kategori.$t == filter || filter == "alle") {
-
             const klon = skabelon.cloneNode(true);
 
-            const h2 = klon.querySelector("h2");
+            klon.querySelector("img").src = `imgs/small/${menu.gsx$billede.$t}-sm.jpg`;
 
-            h2.textContent = menu.gsx$navn.$t;
+            klon.querySelector("img").alt = menu.gsx$navn.$t;
 
-            const kort = klon.querySelector(".kort");
+            klon.querySelector("h2").textContent = menu.gsx$navn.$t;
+            klon.querySelector(".kort").textContent = menu.gsx$kort.$t;
 
-            kort.textContent = menu.gsx$kort.$t;
-
-            const pris = klon.querySelector(".pris");
-            pris.textContent = menu.gsx$pris.$t + " kr";
-
-
-            klon.querySelector("img").src = "imgs/small/" + menu.gsx$billede.$t + "-sm.jpg";
-
-            klon.querySelector(".menu").addEventListener("click", () => {
-                location.href = `separat.html?id=${menu.gsx$id.$t}`;
-
-            });
-
+            klon.querySelector(".pris").textContent = menu.gsx$pris.$t;
 
             liste.appendChild(klon);
+
+            liste.lastElementChild.addEventListener("click", () => {
+                location.href = `separat.html?id=${menu.gsx$id.$t}`;
+            });
+
         }
     })
-
-}
-
-function skjulDetalje() {
-    document.querySelector("#detalje").style.display = "none";
 }

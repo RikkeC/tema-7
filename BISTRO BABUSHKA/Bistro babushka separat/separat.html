@@ -10,10 +10,16 @@
             width: 100%;
         }
 
-        .menu {
-            padding: 1em;
-            border: 1px solid;
+        #detalje {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            overflow: scroll;
         }
+
 
         #detalje .luk {
             position: fixed;
@@ -32,6 +38,7 @@
             background: white;
 
         }
+
     </style>
 
 </head>
@@ -50,6 +57,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get("id");
+        console.log(id);
 
         let menuer;
         const url = `https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json`;
@@ -57,10 +65,11 @@
         document.addEventListener("DOMContentLoaded", start)
 
         function start() {
+            loadData();
             document.querySelector(".luk").addEventListener("click", () => {
                 history.back();
-            });
-            loadData();
+            })
+
         }
 
         async function loadData() {
@@ -73,15 +82,19 @@
             menuer.feed.entry.forEach(menu => {
                 if (menu.gsx$id.$t == id) {
 
-                    document.querySelector("#detalje h2").textContent = menu.gsx$navn.$t;
-                    document.querySelector("img").src "imgs/large/" + menu.gsx$billede.$t + ".jpg";
-                    document.querySelector("img").alt = `Billed af ${menu.gsx$billede.$t}`;
+                    document.querySelector("h2").textContent = menu.gsx$navn.$t;
+                    document.querySelector("#detalje img").src = `imgs/large/${menu.gsx$billede.$t}.jpg`;
 
-                    document.querySelector("#detalje #lang").textContent = menu.gsx$lang.$t;
+                    document.querySelector("#detalje img").alt = menu.gsx$navn.$t;
 
-                    document.querySelector("#detalje #pris").textContent = menu.gsx$pris.$t;
+                    document.querySelector("#lang").textContent = menu.gsx$lang.$t;
+
+                    document.querySelector("#pris").textContent = `Pris:${menu.gsx$pris.$t}kr.`;
                 }
             })
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
