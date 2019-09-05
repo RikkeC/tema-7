@@ -41,7 +41,7 @@ function visData() {
             klon.querySelector("h2").textContent = menu.gsx$navn.$t;
             klon.querySelector(".kort").textContent = menu.gsx$kort.$t;
 
-            klon.querySelector(".pris").textContent = menu.gsx$pris.$t;
+            klon.querySelector(".pris").textContent = `Pris: ${menu.gsx$pris.$t} kr.`;
 
             liste.appendChild(klon);
 

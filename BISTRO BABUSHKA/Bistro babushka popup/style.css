@@ -6,12 +6,13 @@ article {
     border: 2px solid lightgrey;
     text-align: center;
     padding: 15px;
+    position: relative;
 
 }
 
 nav {
     text-align: center;
-    margin: 3vw;
+    margin: 2vw;
 }
 
 button {
@@ -19,6 +20,7 @@ button {
     padding: 1vw 2vw;
     font-size: 1rem;
     cursor: pointer;
+    margin: 1.5vw;
 }
 
 button:hover {
@@ -29,10 +31,10 @@ button:hover {
     background-color: lightgray;
 }
 
-#detalje .luk {
-    position: fixed;
-    top: 5vw;
-    right: 31vw;
+#detalje button.luk {
+    position: absolute;
+    top: 0;
+    right: 0;
     font-size: 2rem;
     cursor: pointer;
 
@@ -54,10 +56,14 @@ button:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
+    background-color: hsla(0, 0%, 83%, 0.48);
 
 
 }
 
+#detalje h2 {
+    font-size: 3vw;
+}
 
 #liste {
     display: grid;
@@ -78,6 +84,16 @@ h2 {
 
 }
 
+p {
+    text-align: left;
+
+}
+
+#pris {
+    text-align: right;
+    font-size: 1.2vw;
+}
+
 footer {
     background-color: gainsboro;
     display: flex;
@@ -87,4 +103,31 @@ footer {
 
 footer p {
     margin: 1vw 5vw;
+}
+
+@media only screen and (max-width:800px) {
+    #detalje .menu {
+        width: 70vw;
+
+    }
+
+    #detalje h2 {
+        font-size: 5vw;
+    }
+
+    #pris {
+        text-align: right;
+        font-size: 3.5vw;
+    }
+
+    footer {
+        display: block;
+        justify-content: center;
+        height: 35vw;
+    }
+
+    footer p {
+        margin: 1vw 5vw;
+    }
+
 }

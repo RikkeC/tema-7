@@ -39,6 +39,36 @@
 
         }
 
+        h2 {
+            font-size: 4vw;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.5vw;
+        }
+
+        @media only screen and (max-width:800px) {
+            #detalje .menu {
+                width: 75vw;
+
+            }
+
+            #detalje h2 {
+                font-size: 8vw;
+            }
+
+            #pris {
+                text-align: right;
+                font-size: 3.5vw;
+            }
+
+            p {
+                font-size: 3.5vw;
+            }
+
+        }
+
     </style>
 
 </head>
@@ -89,7 +119,7 @@
 
                     document.querySelector("#lang").textContent = menu.gsx$lang.$t;
 
-                    document.querySelector("#pris").textContent = `Pris:${menu.gsx$pris.$t}kr.`;
+                    document.querySelector("#pris").textContent = `Pris: ${menu.gsx$pris.$t}kr.`;
                 }
             })
         }
